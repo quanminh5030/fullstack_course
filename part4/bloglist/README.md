@@ -15,5 +15,5 @@ $ npm test
 ```
 ### test specific case (Post Request for instance)
 ```bash
-$ npm run test-post
+$ npm run test-post-request
 ```
