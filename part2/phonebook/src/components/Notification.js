@@ -5,8 +5,10 @@ const Notification = ({ message }) => {
     return null
   }
 
+  const isErrorMsg = message.includes('removed') || message.includes('failed');
+
   return (
-    <div className={!message.includes('removed') ? 'success' : 'error'}>
+    <div className={!isErrorMsg ? 'success' : 'error'}>
       {message}
     </div>
   )

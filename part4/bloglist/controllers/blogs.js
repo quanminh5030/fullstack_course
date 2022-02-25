@@ -15,7 +15,7 @@ blogsRouter.post('/', userExtractor, async (req, res) => {
   blog.user = user._id;
 
   if (!blog.title && !blog.url) {
-    res.status(400).end();
+    return res.status(400).send({ error: 'title or url missing' });
   } else {
     blog.likes = blog.likes ? blog.likes : 0;
     const savedBlog = await blog.save();
@@ -44,18 +44,11 @@ blogsRouter.delete('/:id', userExtractor, async (req, res) => {
   }
 })
 
-blogsRouter.put('/:id', async (req, res) => {
-  const body = req.body;
-
-  const blog = {
-    title: body.title,
-    author: body.author,
-    url: body.url,
-    likes: body.likes
-  }
+blogsRouter.put('/:id', userExtractor, async (req, res) => {
+  const blog = req.body;
 
   if (!blog.title && !blog.url) {
-    res.status(400).end();
+    return res.status(400).send({ error: 'title or url missing' });
   } else {
     const result = await Blog.findByIdAndUpdate(req.params.id, blog, { new: true });
     res.json(result);

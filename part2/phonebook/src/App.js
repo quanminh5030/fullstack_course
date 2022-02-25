@@ -30,13 +30,19 @@ const App = () => {
       shouldUpdate &&
         personService.updatePerson(nameExisted[0].id, newPerson)
           .then(returnedPerson => {
-            setPersons(persons.map(person => person.id === returnedPerson.id ? returnedPerson : person));
+            if (returnedPerson) {
+              setPersons(persons.map(person => person.id === returnedPerson.id ? returnedPerson : person));
+              setNewPerson({ name: '', number: '' });
 
-            setSuccessMsg(`Updated ${returnedPerson.name}`);
-            setTimeout(() => setSuccessMsg(null), 5000);
+              setSuccessMsg(`Updated ${returnedPerson.name}`);
+              setTimeout(() => setSuccessMsg(null), 5000);
+            } else {
+              setSuccessMsg(`Person ${newPerson.name} has already been removed from the server`);
+              setTimeout(() => setSuccessMsg(null), 5000);
+            }
           })
           .catch(err => {
-            setSuccessMsg(`Information of ${newPerson.name} has already been removed from server`);
+            setSuccessMsg(err.response.data.error);
             setTimeout(() => setSuccessMsg(null), 5000);
           })
 
@@ -49,7 +55,10 @@ const App = () => {
           setSuccessMsg(`Added ${data.name}`);
           setTimeout(() => setSuccessMsg(null), 5000);
         })
-        .catch(err => { console.error(err) })
+        .catch(err => {
+          setSuccessMsg(err.response.data.error);
+          setTimeout(() => setSuccessMsg(null), 5000);
+        })
     }
   }
 
