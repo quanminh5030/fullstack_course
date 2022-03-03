@@ -9,6 +9,7 @@ const LoginForm = ({ userCredential, handleChange, handleLogin }) => {
         name='username'
         value={userCredential.username}
         onChange={handleChange}
+        id='username'
       />
     </div>
 
@@ -19,10 +20,11 @@ const LoginForm = ({ userCredential, handleChange, handleLogin }) => {
         name='password'
         value={userCredential.password}
         onChange={handleChange}
+        id='password'
       />
     </div>
 
-    <button type='submit'>login</button>
+    <button id='login-button' type='submit'>login</button>
   </form>
 }
 

@@ -38,13 +38,13 @@ const Blog = ({ blog, likeBlog, currentUser, deleteBlog }) => {
     return (
       <div className='togglableContent'>
         <div>{blog.url}</div>
-        <div>
+        <div className='like'>
           likes {blog.likes}
-          <button onClick={handleLike}>like</button>
+          <button id='like-button' onClick={handleLike}>like</button>
         </div>
         <div>{blog.user && blog.user.name}</div>
         {currentUser === blog.user.username &&
-          <button style={btnStyle} onClick={() => deleteBlog(blog)}>
+          <button id='remove-button' style={btnStyle} onClick={() => deleteBlog(blog)}>
             remove
           </button>
         }
@@ -55,7 +55,7 @@ const Blog = ({ blog, likeBlog, currentUser, deleteBlog }) => {
   return (
     <div style={blogStyle} className='blog'>
       {blog.title} {blog.author} {' '}
-      <button onClick={toggleVisibility}>{btnLabel}</button>
+      <button id='view-button' onClick={toggleVisibility}>{btnLabel}</button>
 
       {
         showDetails && blogDetails()

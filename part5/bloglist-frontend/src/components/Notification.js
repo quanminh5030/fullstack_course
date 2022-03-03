@@ -28,7 +28,7 @@ const Notification = ({ message }) => {
   const isErrMsg = message.includes('wrong') || message.includes('missing')
 
   return (
-    <div style={isErrMsg ? errMsg : succMsg}>
+    <div className='error' style={isErrMsg ? errMsg : succMsg}>
       {message}
     </div>
   )
