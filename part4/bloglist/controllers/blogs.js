@@ -48,11 +48,26 @@ blogsRouter.put('/:id', userExtractor, async (req, res) => {
   const blog = req.body;
 
   if (!blog.title && !blog.url) {
-    return res.status(400).send({ error: 'title or url missing' });
+    res.status(400).send({ error: 'title or url missing' });
   } else {
     const result = await Blog.findByIdAndUpdate(req.params.id, blog, { new: true });
     res.json(result);
   }
+})
+
+blogsRouter.post('/:id/comments', async (req, res) => {
+  const { id } = req.params
+  const { comment } = req.body;
+  const blog = await Blog.findById(id)
+
+  blog.comments.push(comment)
+
+  if (!comment) {
+    return res.status(400).send({ error: 'comment is missing' });
+  }
+
+  const result = await Blog.findByIdAndUpdate(id, blog, { new: true })
+  res.status(200).json(result)
 })
 
 module.exports = blogsRouter;

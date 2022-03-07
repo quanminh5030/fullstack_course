@@ -1,37 +1,37 @@
-import React from 'react'
+import React from "react";
 
 const errMsg = {
-  fontSize: 'larger',
-  border: '4px solid red',
+  fontSize: "larger",
+  border: "4px solid red",
   borderRadius: 5,
-  background: '#c9c8c7',
-  color: 'red',
+  background: "#c9c8c7",
+  color: "red",
   padding: 10,
-  margin: '20px 0',
-}
+  margin: "20px 0",
+};
 
 const succMsg = {
-  fontSize: 'larger',
-  border: '4px solid green',
+  fontSize: "larger",
+  border: "4px solid green",
   borderRadius: 5,
-  background: '#c9c8c7',
-  color: 'green',
+  background: "#c9c8c7",
+  color: "green",
   padding: 10,
-  margin: '20px 0',
-}
+  margin: "20px 0",
+};
 
 const Notification = ({ message }) => {
   if (message === null) {
-    return null
+    return null;
   }
 
-  const isErrMsg = message.includes('wrong') || message.includes('missing')
+  const isErrMsg = message.includes("wrong") || message.includes("missing");
 
   return (
-    <div className='error' style={isErrMsg ? errMsg : succMsg}>
+    <div className="error" style={isErrMsg ? errMsg : succMsg}>
       {message}
     </div>
-  )
-}
+  );
+};
 
-export default Notification
+export default Notification;
